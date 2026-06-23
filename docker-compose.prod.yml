@@ -19,6 +19,8 @@ services:
       context: ./apps/dashboard
       dockerfile: Dockerfile
     restart: unless-stopped
+    ports:
+      - "3000:3000"
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       PROM_NET1_URL: ${PROM_NET1_URL}
@@ -31,19 +33,5 @@ services:
       postgres:
         condition: service_healthy
 
-  nginx:
-    image: nginx:alpine
-    restart: unless-stopped
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./nginx/dashboard.conf:/etc/nginx/conf.d/default.conf:ro
-      - /etc/letsencrypt:/etc/letsencrypt:ro
-      - certbot_webroot:/var/www/certbot:ro
-    depends_on:
-      - app
-
 volumes:
   postgres_data:
-  certbot_webroot:
