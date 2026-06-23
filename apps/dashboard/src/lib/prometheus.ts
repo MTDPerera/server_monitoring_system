@@ -154,6 +154,7 @@ export interface ServerMetrics {
   diskPct: string | null;
   diskTotal: string | null;
   diskUsed: string | null;
+  diskAvail: string | null;
   load1: string | null;
   load5: string | null;
   load15: string | null;
