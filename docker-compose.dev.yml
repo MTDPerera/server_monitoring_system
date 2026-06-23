@@ -1,0 +1,64 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: monitoring
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  prometheus-net1:
+    image: prom/prometheus:v2.53.0
+    volumes:
+      - ./prometheus/net1.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_net1_data:/prometheus
+    ports:
+      - "9091:9090"
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.enable-lifecycle'
+      - '--web.listen-address=0.0.0.0:9090'
+    restart: unless-stopped
+
+  prometheus-net2:
+    image: prom/prometheus:v2.53.0
+    volumes:
+      - ./prometheus/net2.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_net2_data:/prometheus
+    ports:
+      - "9092:9090"
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.enable-lifecycle'
+      - '--web.listen-address=0.0.0.0:9090'
+    restart: unless-stopped
+
+  prometheus-net3:
+    image: prom/prometheus:v2.53.0
+    volumes:
+      - ./prometheus/net3.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_net3_data:/prometheus
+    ports:
+      - "9093:9090"
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.enable-lifecycle'
+      - '--web.listen-address=0.0.0.0:9090'
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  prometheus_net1_data:
+  prometheus_net2_data:
+  prometheus_net3_data:

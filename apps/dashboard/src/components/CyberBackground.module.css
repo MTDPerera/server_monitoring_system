@@ -1,0 +1,6 @@
+.fallback {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 60% 50%, #021428 0%, #010912 100%);
+  transition: opacity 1.5s ease;
+}
