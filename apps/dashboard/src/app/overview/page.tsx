@@ -4,7 +4,6 @@ import { useState, useEffect, useCallback } from 'react';
 import dynamic from 'next/dynamic';
 import { RefreshCw } from 'lucide-react';
 import { NetworkCard } from '@/components/NetworkCard';
-import { CyberBackground } from '@/components/CyberBackground';
 import type { NetworkStats, TargetInfo } from '@/lib/prometheus';
 
 const WorldMap = dynamic(
@@ -63,7 +62,6 @@ export default function OverviewPage() {
 
   return (
     <div className="relative p-6">
-      <CyberBackground className="fixed inset-0 -z-10" />
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="font-bold text-lg tracking-widest uppercase"
