@@ -186,7 +186,7 @@ export function WorldMap({ networkStats = [] }: Props) {
             <circle cx={280} cy={285} r={270} fill="url(#globeGlow)" />
             <ZoomableGroup>
               <Geographies geography={GEO_URL}>
-                {({ geographies }) =>
+                {({ geographies }: { geographies: any[] }) =>
                   geographies.map(geo => (
                     <Geography
                       key={geo.rsmKey}
