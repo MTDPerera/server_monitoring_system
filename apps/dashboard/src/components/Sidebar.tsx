@@ -10,6 +10,7 @@ const navItems = [
   { href: '/servers',   label: 'Servers',   icon: Server,          color: '#4ade80', glow: 'rgba(74,222,128,0.6)'  },
   { href: '/websites',  label: 'Websites',  icon: Globe,           color: '#c084fc', glow: 'rgba(192,132,252,0.6)' },
   { href: '/endpoints', label: 'Endpoints', icon: Plug,            color: '#fb923c', glow: 'rgba(251,146,60,0.6)'  },
+  { href: '/alerts',    label: 'Alerts',    icon: AlertTriangle,   color: '#f87171', glow: 'rgba(248,113,113,0.6)' },
 ];
 
 interface Alert { label: string; type: 'server' | 'website'; }
@@ -134,7 +135,10 @@ export function Sidebar() {
       </nav>
 
       {/* Active Alerts */}
-      <div className="mx-3 mb-3 px-4 py-3 rounded-md" style={{ border: `1px solid ${alerts.length > 0 ? 'rgba(248,113,113,0.25)' : 'rgba(74,222,128,0.15)'}`, background: alerts.length > 0 ? 'rgba(248,113,113,0.04)' : 'rgba(74,222,128,0.03)', transition: 'all 0.5s ease' }}>
+      <Link href="/alerts" className="block mx-3 mb-3 px-4 py-3 rounded-md cursor-pointer transition-all"
+        style={{ border: `1px solid ${alerts.length > 0 ? 'rgba(248,113,113,0.25)' : 'rgba(74,222,128,0.15)'}`, background: alerts.length > 0 ? 'rgba(248,113,113,0.04)' : 'rgba(74,222,128,0.03)', transition: 'all 0.5s ease' }}
+        onMouseEnter={e => (e.currentTarget.style.background = alerts.length > 0 ? 'rgba(248,113,113,0.08)' : 'rgba(74,222,128,0.07)')}
+        onMouseLeave={e => (e.currentTarget.style.background = alerts.length > 0 ? 'rgba(248,113,113,0.04)' : 'rgba(74,222,128,0.03)')}>
         <div className="flex items-center justify-between mb-2">
           <p className="tracking-widest uppercase flex items-center gap-1.5" style={{ color: alerts.length > 0 ? 'rgba(248,113,113,0.7)' : 'rgba(74,222,128,0.5)', fontSize: '8px', letterSpacing: '0.2em' }}>
             <AlertTriangle className="w-2.5 h-2.5" />
@@ -157,7 +161,7 @@ export function Sidebar() {
             ))}
           </div>
         )}
-      </div>
+      </Link>
 
       {/* Live Clock */}
       <div className="mx-3 mb-3 px-4 py-3 rounded-md" style={{ border: '1px solid rgba(34,211,238,0.12)', background: 'rgba(34,211,238,0.03)' }}>

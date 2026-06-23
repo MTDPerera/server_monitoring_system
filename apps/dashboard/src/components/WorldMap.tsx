@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useCallback } from 'react';
-import { ComposableMap, Geographies, Geography, Marker, ZoomableGroup } from 'react-simple-maps';
+import { ComposableMap, Geographies, Geography, Marker } from 'react-simple-maps';
 
 const GEO_URL = '/countries-110m.json';
 
@@ -78,8 +78,6 @@ export function WorldMap({ networkStats = [] }: Props) {
     setActive(name);
     const start = performance.now();
     const fromRotate = rotate;
-    const fromScale = scale;
-    const targetScale = 1600;
 
     function step(now: number) {
       const t = Math.min((now - start) / ANIM_DURATION, 1);
@@ -89,11 +87,10 @@ export function WorldMap({ networkStats = [] }: Props) {
         fromRotate[1] + (target[1] - fromRotate[1]) * ease,
         0,
       ]);
-      setScale(fromScale + (targetScale - fromScale) * ease);
       if (t < 1) animRef.current = requestAnimationFrame(step);
     }
     animRef.current = requestAnimationFrame(step);
-  }, [rotate, scale]);
+  }, [rotate]);
 
   return (
     <div className="relative rounded-xl overflow-hidden"
@@ -124,7 +121,6 @@ export function WorldMap({ networkStats = [] }: Props) {
               if (animRef.current) cancelAnimationFrame(animRef.current);
               const start = performance.now();
               const fromRotate = rotate;
-              const fromScale = scale;
               function step(now: number) {
                 const t = Math.min((now - start) / ANIM_DURATION, 1);
                 const ease = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
@@ -133,7 +129,6 @@ export function WorldMap({ networkStats = [] }: Props) {
                   fromRotate[1] + (DEFAULT_ROTATE[1] - fromRotate[1]) * ease,
                   0,
                 ]);
-                setScale(fromScale + (270 - fromScale) * ease);
                 if (t < 1) animRef.current = requestAnimationFrame(step);
                 else setActive(null);
               }
@@ -184,7 +179,6 @@ export function WorldMap({ networkStats = [] }: Props) {
             {/* Outer glow ring */}
             <circle cx={280} cy={285} r={273} fill="none" stroke="#38bdf8" strokeWidth={0.4} strokeOpacity={0.3} />
             <circle cx={280} cy={285} r={270} fill="url(#globeGlow)" />
-            <ZoomableGroup>
               <Geographies geography={GEO_URL}>
                 {({ geographies }: { geographies: any[] }) =>
                   geographies.map(geo => (
@@ -206,13 +200,10 @@ export function WorldMap({ networkStats = [] }: Props) {
 
               {locations.map(loc => (
                 <Marker key={loc.name} coordinates={loc.coordinates}>
-                  {/* Outer pulse ring */}
                   <circle r={18} fill="#22d3ee" fillOpacity={0.06} stroke="#22d3ee" strokeWidth={0.5} strokeOpacity={0.3} />
-                  {/* Mid ring */}
                   <circle r={9} fill="none"
                     stroke={loc.online ? '#22d3ee' : '#f87171'}
                     strokeWidth={1} strokeOpacity={0.7} />
-                  {/* Core dot */}
                   <circle r={4}
                     fill={active === loc.name ? '#38bdf8' : (loc.online ? '#22d3ee' : '#f87171')}
                     stroke="#020e1f" strokeWidth={1.5} />
@@ -231,7 +222,6 @@ export function WorldMap({ networkStats = [] }: Props) {
                   </text>
                 </Marker>
               ))}
-            </ZoomableGroup>
           </ComposableMap>
 
           {/* Country list overlaid on top-left of globe */}
