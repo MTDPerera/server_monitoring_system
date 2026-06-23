@@ -47,13 +47,17 @@ export default function LandingPage() {
       <div className="relative z-10 flex flex-col items-center text-center px-8">
 
         {/* Icon */}
-        <div className="mb-8 w-20 h-20 rounded-2xl flex items-center justify-center"
+        <div className="mb-8 rounded-2xl flex items-center justify-center relative"
           style={{
+            width: '260px', height: '260px',
             background: 'rgba(34,211,238,0.07)',
             border: '1px solid rgba(34,211,238,0.3)',
             boxShadow: '0 0 40px rgba(34,211,238,0.15), inset 0 0 20px rgba(34,211,238,0.05)',
           }}>
-          <Activity className="w-10 h-10" style={{ color: '#22d3ee', filter: 'drop-shadow(0 0 8px rgba(34,211,238,0.8))' }} />
+          <Activity style={{ width: '240px', height: '170px', color: '#22d3ee', filter: 'drop-shadow(0 0 8px rgba(34,211,238,0.8))' }} />
+          {/* TD logo overlay */}
+          <img src="/td-logo.png" alt="TD" className="absolute"
+            style={{ width: '65px', height: '65px', objectFit: 'contain' }} />
         </div>
 
         {/* Title */}
@@ -127,8 +131,8 @@ export default function LandingPage() {
       </div>
 
       {/* TD Productions logo — bottom right, low visibility */}
-      <div className="fixed bottom-6 right-8 pointer-events-none" style={{ opacity: 0.18 }}>
-        <img src="/td-logo.png" alt="TD Productions" style={{ width: '80px', height: 'auto' }} />
+      <div className="fixed bottom-10 right-8 pointer-events-none" style={{ opacity: 0.15 }}>
+        <img src="/td-logo.png" alt="TD Productions" style={{ width: '90px', height: 'auto' }} />
       </div>
     </div>
   );
