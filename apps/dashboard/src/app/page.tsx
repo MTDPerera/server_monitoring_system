@@ -124,10 +124,11 @@ export default function LandingPage() {
           Enter Dashboard
         </Link>
 
-        {/* Version */}
-        <p className="mt-8 tracking-widest uppercase" style={{ color: 'rgba(34,211,238,0.2)', fontSize: '9px' }}>
-          v0.1.0 · dev build
-        </p>
+      </div>
+
+      {/* TD Productions logo — bottom right, low visibility */}
+      <div className="fixed bottom-6 right-8 pointer-events-none" style={{ opacity: 0.18 }}>
+        <img src="/td-logo.png" alt="TD Productions" style={{ width: '80px', height: 'auto' }} />
       </div>
     </div>
   );
