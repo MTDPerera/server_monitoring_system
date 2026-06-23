@@ -26,8 +26,7 @@ npm-debug.log*
 .DS_Store
 Thumbs.db
 
-# Prisma
-apps/dashboard/prisma/migrations/**/migration.sql
+# Prisma (migration SQL files must be committed — do not ignore them)
 
 # TypeScript
 *.tsbuildinfo
