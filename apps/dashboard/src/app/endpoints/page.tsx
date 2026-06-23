@@ -3,7 +3,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { Plus, RefreshCw, Trash2, Globe, X, ExternalLink, Pencil, ChevronDown, ChevronUp } from 'lucide-react';
-import { CyberBackground } from '@/components/CyberBackground';
 
 interface EndpointCheck {
   id: string;
@@ -457,7 +456,6 @@ export default function EndpointsPage() {
 
   return (
     <div className="relative p-6">
-      <CyberBackground className="fixed inset-0 -z-10" videoId="Im7slkFMtI8" opacity={0.10} />
 
       {/* Header */}
       <div className="flex items-center justify-between mb-6">

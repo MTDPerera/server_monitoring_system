@@ -3,7 +3,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { Plus, RefreshCw, Trash2, Globe, X, ExternalLink, Pencil } from 'lucide-react';
-import { CyberBackground } from '@/components/CyberBackground';
 
 function getFaviconUrl(url: string) {
   try {
@@ -393,7 +392,6 @@ export default function WebsitesPage() {
 
   return (
     <div className="relative p-6">
-      <CyberBackground className="fixed inset-0 -z-10" videoId="Im7slkFMtI8" opacity={0.10} />
 
       {/* Header */}
       <div className="flex items-center justify-between mb-6">

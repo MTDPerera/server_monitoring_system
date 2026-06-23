@@ -4,7 +4,6 @@ import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { RefreshCw, Search, ChevronRight } from 'lucide-react';
 import type { TargetInfo } from '@/lib/prometheus';
-import { CyberBackground } from '@/components/CyberBackground';
 
 export default function ServersPage() {
   const router = useRouter();
@@ -45,7 +44,6 @@ export default function ServersPage() {
 
   return (
     <div className="relative p-6">
-      <CyberBackground className="fixed inset-0 -z-10" videoId="Im7slkFMtI8" opacity={0.10} />
 
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
