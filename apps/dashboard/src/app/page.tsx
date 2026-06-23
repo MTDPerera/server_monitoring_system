@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import { CyberBackground } from '@/components/CyberBackground';
 import { Activity, Shield, Globe, Zap } from 'lucide-react';
 
 export default function LandingPage() {
@@ -9,12 +8,15 @@ export default function LandingPage() {
     <div className="fixed inset-0 flex items-center justify-center overflow-hidden"
       style={{ background: '#010912' }}>
 
-      {/* Full-screen cyber video background */}
-      <CyberBackground className="fixed inset-0" />
-
-      {/* Dark overlay for readability */}
-      <div className="fixed inset-0 pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at center, rgba(1,9,18,0.3) 0%, rgba(1,9,18,0.55) 100%)' }} />
+      {/* Static CSS background */}
+      <div className="fixed inset-0 pointer-events-none" style={{
+        background: 'radial-gradient(ellipse at 60% 40%, rgba(6,182,212,0.07) 0%, transparent 60%), radial-gradient(ellipse at 20% 80%, rgba(14,116,144,0.06) 0%, transparent 50%)',
+      }} />
+      {/* Grid overlay */}
+      <div className="fixed inset-0 pointer-events-none" style={{
+        backgroundImage: 'linear-gradient(rgba(34,211,238,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(34,211,238,0.03) 1px, transparent 1px)',
+        backgroundSize: '48px 48px',
+      }} />
 
       {/* Corner bracket decorations */}
       <span className="fixed top-6 left-6 w-8 h-8 border-t-2 border-l-2 border-cyan-400/50" />
