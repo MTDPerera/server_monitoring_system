@@ -23,6 +23,7 @@ services:
       - "3000:3000"
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY}
       PROM_NET1_URL: ${PROM_NET1_URL}
       PROM_NET1_LABEL: ${PROM_NET1_LABEL}
       PROM_NET2_URL: ${PROM_NET2_URL}

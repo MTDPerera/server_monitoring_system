@@ -1,15 +1,17 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { checkUrl, checkSslExpiry } from '@/lib/checker';
+import { decrypt } from '@/lib/crypto';
 
 export async function POST() {
   const websites = await prisma.website.findMany();
 
   const results = await Promise.all(
     websites.map(async (site) => {
+      const url = decrypt(site.url);
       const [result, sslExpiresAt] = await Promise.all([
-        checkUrl(site.url, site.expectedStatus),
-        checkSslExpiry(site.url),
+        checkUrl(url, site.expectedStatus),
+        checkSslExpiry(url),
       ]);
       if (sslExpiresAt) {
         await prisma.website.update({ where: { id: site.id }, data: { sslExpiresAt } });
@@ -27,7 +29,6 @@ export async function POST() {
     })
   );
 
-  // Keep only the last 100 checks per website to avoid DB bloat
   for (const site of websites) {
     const old = await prisma.websiteCheck.findMany({
       where: { websiteId: site.id },

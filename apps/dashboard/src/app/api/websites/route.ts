@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { encrypt, decrypt } from '@/lib/crypto';
 
 export const dynamic = 'force-dynamic';
 
@@ -13,7 +14,9 @@ export async function GET() {
     },
     orderBy: { createdAt: 'asc' },
   });
-  return NextResponse.json(websites);
+  // Decrypt URLs before returning to the client
+  const decrypted = websites.map(w => ({ ...w, url: decrypt(w.url) }));
+  return NextResponse.json(decrypted);
 }
 
 export async function POST(request: Request) {
@@ -25,7 +28,7 @@ export async function POST(request: Request) {
   }
 
   const website = await prisma.website.create({
-    data: { name, url, expectedStatus, tags },
+    data: { name, url: encrypt(url), expectedStatus, tags },
   });
-  return NextResponse.json(website, { status: 201 });
+  return NextResponse.json({ ...website, url }, { status: 201 });
 }

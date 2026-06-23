@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { encrypt, decrypt } from '@/lib/crypto';
 
 export const dynamic = 'force-dynamic';
 
@@ -13,7 +14,9 @@ export async function GET() {
     },
     orderBy: { createdAt: 'asc' },
   });
-  return NextResponse.json(endpoints);
+  // Decrypt URLs before returning to the client
+  const decrypted = endpoints.map(e => ({ ...e, url: decrypt(e.url) }));
+  return NextResponse.json(decrypted);
 }
 
 export async function POST(request: Request) {
@@ -25,7 +28,7 @@ export async function POST(request: Request) {
   }
 
   const endpoint = await prisma.endpoint.create({
-    data: { name, url, method, headers, body: reqBody, expectedStatus, tags },
+    data: { name, url: encrypt(url), method, headers, body: reqBody, expectedStatus, tags },
   });
-  return NextResponse.json(endpoint, { status: 201 });
+  return NextResponse.json({ ...endpoint, url }, { status: 201 });
 }

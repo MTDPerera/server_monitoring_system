@@ -1,14 +1,16 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { checkEndpoint } from '@/lib/checker';
+import { decrypt } from '@/lib/crypto';
 
 export async function POST() {
   const endpoints = await prisma.endpoint.findMany();
 
   await Promise.all(
     endpoints.map(async (ep) => {
+      const url = decrypt(ep.url);
       const result = await checkEndpoint(
-        ep.url,
+        url,
         ep.method,
         (ep.headers as Record<string, string>) ?? {},
         ep.body ?? undefined,
@@ -26,7 +28,6 @@ export async function POST() {
     })
   );
 
-  // Trim to last 100 checks per endpoint
   for (const ep of endpoints) {
     const old = await prisma.endpointCheck.findMany({
       where: { endpointId: ep.id },
