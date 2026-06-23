@@ -57,7 +57,7 @@ export default function LandingPage() {
           <Activity style={{ width: '240px', height: '170px', color: '#22d3ee', filter: 'drop-shadow(0 0 8px rgba(34,211,238,0.8))' }} />
           {/* TD logo overlay */}
           <img src="/td-logo.png" alt="TD" className="absolute"
-            style={{ width: '65px', height: '65px', objectFit: 'contain' }} />
+            style={{ width: '65px', height: '65px', objectFit: 'contain', opacity: 0.45 }} />
         </div>
 
         {/* Title */}
