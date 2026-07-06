@@ -66,9 +66,24 @@ If one network goes offline, the other two keep working — the system uses `Pro
 
 ## Screenshots
 
+### Overview
+Real-time summary across all 3 networks — total servers, online/offline counts, per-network health cards, and an interactive globe showing server locations.
+
 ![Overview](screenshots/overview.png)
+
+### Servers
+Full list of all servers across every network. Search by instance name, filter by network, and click any server to open its detail page.
+
 ![Servers](screenshots/servers.png)
+
+### Website Monitoring
+HTTP uptime checks every 60 seconds. Each card shows current status, SSL certificate expiry, response time, sparkline history, and uptime percentage.
+
 ![Websites](screenshots/websites.png)
+
+### API Endpoint Monitoring
+Monitor any API endpoint with any HTTP method (GET, POST, PUT, DELETE). Supports custom headers and request bodies. Filter by status or method.
+
 ![Endpoints](screenshots/endpoints.png)
 
 ---
