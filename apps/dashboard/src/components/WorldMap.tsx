@@ -18,32 +18,32 @@ interface ServerLocation {
 
 const LOCATIONS: ServerLocation[] = [
   {
-    name: 'Sydney',
-    country: 'Australia',
-    flag: '🇦🇺',
-    coordinates: [151.2, -33.9],
-    rotate: [-151.2, 33.9, 0],
-    network: 'Physical Servers',
+    name: 'Singapore',
+    country: 'Singapore',
+    flag: '🇸🇬',
+    coordinates: [103.8, 1.35],
+    rotate: [-103.8, -1.35, 0],
+    network: 'Network 1',
     online: true,
     serverCount: 0,
   },
   {
-    name: 'Frankfurt',
-    country: 'Germany',
-    flag: '🇩🇪',
-    coordinates: [8.7, 50.1],
-    rotate: [-8.7, -50.1, 0],
-    network: 'Hetzner Bare-Metal',
+    name: 'Amsterdam',
+    country: 'Netherlands',
+    flag: '🇳🇱',
+    coordinates: [4.9, 52.37],
+    rotate: [-4.9, -52.37, 0],
+    network: 'Network 2',
     online: true,
     serverCount: 0,
   },
   {
-    name: 'Colombo',
-    country: 'Sri Lanka',
-    flag: '🇱🇰',
-    coordinates: [79.9, 6.9],
-    rotate: [-79.9, -6.9, 0],
-    network: 'Third Network',
+    name: 'Mumbai',
+    country: 'India',
+    flag: '🇮🇳',
+    coordinates: [72.88, 19.07],
+    rotate: [-72.88, -19.07, 0],
+    network: 'Network 3',
     online: true,
     serverCount: 0,
   },
@@ -63,9 +63,7 @@ export function WorldMap({ networkStats = [] }: Props) {
   const animRef = useRef<number | null>(null);
 
   const locations = LOCATIONS.map(loc => {
-    const stat = networkStats.find(n =>
-      n.network.toLowerCase().includes(loc.network.toLowerCase().split(' ')[0])
-    );
+    const stat = networkStats.find(n => n.network === loc.network);
     return {
       ...loc,
       online: stat ? stat.up > 0 : true,

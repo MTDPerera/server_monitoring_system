@@ -64,6 +64,15 @@ If one network goes offline, the other two keep working — the system uses `Pro
 
 ---
 
+## Screenshots
+
+![Overview](screenshots/overview.png)
+![Servers](screenshots/servers.png)
+![Websites](screenshots/websites.png)
+![Endpoints](screenshots/endpoints.png)
+
+---
+
 ## Documentation
 
 | Guide | Description |

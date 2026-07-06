@@ -3,12 +3,35 @@ global:
   evaluation_interval: 15s
 
 scrape_configs:
-  # In dev: Prometheus scrapes itself as a stand-in for node_exporter targets.
-  # In production: replace these targets with your actual server IPs on port 9100.
-  - job_name: 'servers'
+  - job_name: 'server-01'
     static_configs:
-      - targets:
-          - 'localhost:9090'
+      - targets: ['localhost:9090']
         labels:
           network: 'network1'
-          env: 'dev-mock'
+    relabel_configs:
+      - source_labels: [__address__]
+        regex: '.*'
+        target_label: instance
+        replacement: '192.168.1.10:9100'
+
+  - job_name: 'server-02'
+    static_configs:
+      - targets: ['localhost:9090']
+        labels:
+          network: 'network1'
+    relabel_configs:
+      - source_labels: [__address__]
+        regex: '.*'
+        target_label: instance
+        replacement: '192.168.1.11:9100'
+
+  - job_name: 'server-03'
+    static_configs:
+      - targets: ['localhost:9090']
+        labels:
+          network: 'network1'
+    relabel_configs:
+      - source_labels: [__address__]
+        regex: '.*'
+        target_label: instance
+        replacement: '192.168.1.12:9100'

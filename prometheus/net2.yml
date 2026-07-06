@@ -3,10 +3,35 @@ global:
   evaluation_interval: 15s
 
 scrape_configs:
-  - job_name: 'servers'
+  - job_name: 'hetzner-01'
     static_configs:
-      - targets:
-          - 'localhost:9090'
+      - targets: ['localhost:9090']
         labels:
           network: 'hetzner'
-          env: 'dev-mock'
+    relabel_configs:
+      - source_labels: [__address__]
+        regex: '.*'
+        target_label: instance
+        replacement: '65.21.10.5:9100'
+
+  - job_name: 'hetzner-02'
+    static_configs:
+      - targets: ['localhost:9090']
+        labels:
+          network: 'hetzner'
+    relabel_configs:
+      - source_labels: [__address__]
+        regex: '.*'
+        target_label: instance
+        replacement: '65.21.10.6:9100'
+
+  - job_name: 'hetzner-03'
+    static_configs:
+      - targets: ['localhost:9090']
+        labels:
+          network: 'hetzner'
+    relabel_configs:
+      - source_labels: [__address__]
+        regex: '.*'
+        target_label: instance
+        replacement: '65.21.10.7:9100'
