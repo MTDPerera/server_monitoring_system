@@ -64,6 +64,15 @@ If one network goes offline, the other two keep working — the system uses `Pro
 
 ---
 
+## Documentation
+
+| Guide | Description |
+|---|---|
+| [SETUP.md](SETUP.md) | Full production setup — install node_exporter, Prometheus, Nginx, and deploy the dashboard |
+| [System_Documentation.md](System_Documentation.md) | Architecture, API routes, database schema, and code reference |
+
+---
+
 ## Quick Start (Local Dev)
 
 ### Prerequisites
